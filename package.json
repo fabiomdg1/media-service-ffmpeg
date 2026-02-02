@@ -1,0 +1,13 @@
+{
+  "name": "media-service-ffmpeg",
+  "version": "1.0.0",
+  "description": "Servico Node simples com FFmpeg para testes",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.0",
+    "multer": "^1.4.5"
+  }
+}
