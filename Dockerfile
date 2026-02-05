@@ -1,14 +1,18 @@
-FROM node:18-alpine
+FROM n8nio/n8n:2.6.3
 
-WORKDIR /app
+USER root
 
-RUN apk add --no-cache ffmpeg
+# Instalar ffmpeg e dependências
+RUN apt-get update \
+    && apt-get install -y ffmpeg python3 python3-pip \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-COPY package*.json ./
-RUN npm install
+# Voltar para o usuário padrão do n8n
+USER node
 
-COPY . .
+# Expor porta padrão do n8n
+EXPOSE 5678
 
-EXPOSE 3000
-
-CMD ["node", "index.js"]
+# Comando padrão
+CMD ["n8n"]
