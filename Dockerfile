@@ -1,13 +1,18 @@
-FROM n8nio/n8n:2.6.3
+FROM n8nio/n8n:latest
 
 USER root
 
-# Instalar ffmpeg e dependências (Alpine)
-RUN apk add --no-cache \
+# Instalar ffmpeg e dependências (Debian)
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
     ffmpeg \
     python3 \
-    py3-pip
+    python3-pip && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 USER node
+
 EXPOSE 5678
+
 CMD ["n8n"]
